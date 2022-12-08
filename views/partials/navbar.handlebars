@@ -1,0 +1,27 @@
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="/api/logout">Logout</a></li>
+  {{!-- <li><a href="/allusers">All users</a></li> --}}
+
+</ul>
+
+<nav>
+  <div class="nav-wrapper #263238 blue-grey darken-4 heading">
+    <a href="/" class="brand-logo margin-left">The Tech Blog </a>
+    <ul class="right hide-on-med-and-down">
+
+
+      {{#if session.loggedIn}}
+        <li><a href="/"  class="margin-right">Home</a></li>
+        <li><a href="/dashboard"  class="margin-right">Dashboard</a></li>
+        <li><a class="dropdown-trigger margin-right" href="#!" data-target="dropdown1">Welcome {{session.firstname}}<i class="material-icons right">arrow_drop_down</i></a></li>
+
+      {{else}}
+        <li><a href="/"  class="margin-right">Home</a></li>
+        <li><a href="/dashboard"  class="margin-right">Dashboard</a></li>
+        <li><a href="/login"  class="margin-right">Login</a></li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+
+<script src="/js/nav.js"></script>

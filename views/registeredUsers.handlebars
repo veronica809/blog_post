@@ -1,0 +1,20 @@
+   {{> navbar}}
+
+<div class= "container">
+    <h5>Registered Users:</h5>
+    {{#each users}}   
+        <ul class="collection hoverable">
+            <li class="collection-item avatar">
+            <img src="/images/medical.png" alt="" class="circle">
+            <span class="title">{{this.dataValues.firstname}} {{this.dataValues.lastname}}</span>
+            <span><p>Username: {{this.dataValues.username}}</span><br>
+            <span> Role:  {{this.dataValues.profile}}<br></span>
+            </p>
+                <a href="#!" id ={{this.dataValues.id}} class="secondary-content"><i class="material-icons delete-btn">delete</i></a>
+
+            </li>
+        </ul>
+    {{/each}}
+</div>
+
+<script src = "/js/registeredUsers.js"></script>
