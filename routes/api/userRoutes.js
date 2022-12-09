@@ -43,8 +43,6 @@ router.post("/login", async (req, res) => {
         username: username,
       },
     });
-    //does the user exist?
-    //no? send back  a 404
     if (!user) {
       return res.status(401).json({ message: "User does not exist" });
     }
@@ -52,13 +50,12 @@ router.post("/login", async (req, res) => {
     //is the password correct?
     const loginResult = await logIn(req, res);
 
-    //add user info to the sessionun
+    //add user info to the session
     if (loginResult) {
       req.session.userId = user.dataValues.id;
       req.session.firstname = user.dataValues.firstname;
       req.session.loggedIn = true;
       res.status(201).json({ message: "Successful login" });
-      // res.redirect("/patientqueue");
     } else {
       res.status(401).json({ message: "Invalid login" });
     }

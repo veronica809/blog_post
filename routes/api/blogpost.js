@@ -1,4 +1,3 @@
-const { Patientlist } = require("../../models");
 const { postList } = require("../../models");
 const { comments } = require("../../models");
 
@@ -21,7 +20,6 @@ router.post("/", async (req, res) => {
   try {
     await postList.create({
       ...req.body,
-      // user_id: req.session.userId,
     });
     console.log("it is responding");
     res.redirect("/dashboard");

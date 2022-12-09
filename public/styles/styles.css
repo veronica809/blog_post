@@ -1,0 +1,21 @@
+.upperpadding {
+  padding-top: 25px;
+}
+.upperpadding25 {
+  padding-top: 25px;
+}
+
+.margin-left {
+  margin-left: 20px;
+}
+.margin-right {
+  margin-right: 20px;
+}
+
+.input-field input[type=textarea1]:focus + label {
+  color: #000;
+}
+#textarea1:focus + label {
+  color: #000;
+  
+}

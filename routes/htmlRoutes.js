@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Patientlist,postList, User } = require("../models");
+const { Patientlist, postList, User } = require("../models");
 const { checkAuth } = require("../middlewares/authMiddleware");
 const e = require("express");
 
@@ -7,19 +7,14 @@ const e = require("express");
 // GET / - home page
 router.get("/", async (req, res) => {
   try {
-    // const blogList = await postList.findAll({
-    //    include: User
-    // });
     const blogList = await postList.findAll();
     console.log(blogList);
     res.render("index", { blogList });
   } catch (err) {
     res.render("index");
-
-    // res.status(400).json({ err, message: "Not found" });
   }
 });
-router.get("/post/:postId",checkAuth, async (req, res) => {
+router.get("/post/:postId", checkAuth, async (req, res) => {
   try {
     console.log("reaching the route");
     console.log(req.params);
@@ -27,8 +22,7 @@ router.get("/post/:postId",checkAuth, async (req, res) => {
       where: {
         id: req.params.postId,
       },
-      include: [{ all: true, nested: true }]
-
+      include: [{ all: true, nested: true }],
     });
 
     if (!blog) {
@@ -36,20 +30,19 @@ router.get("/post/:postId",checkAuth, async (req, res) => {
         message: "Patient not found",
       });
     }
-    console.log(blog.dataValues.User.id)
-    console.log(req.session.userId)
-    var response = {}
-    if (req.session.userId==blog.dataValues.User.id){
+    console.log(blog.dataValues.User.id);
+    console.log(req.session.userId);
+    var response = {};
+    if (req.session.userId == blog.dataValues.User.id) {
       response = {
         ...blog.dataValues,
-        canEdit:true
-      }
-
-    }else{
+        canEdit: true,
+      };
+    } else {
       response = {
         ...blog.dataValues,
-        canEdit:false
-      }
+        canEdit: false,
+      };
     }
     res.render("post", response);
   } catch (err) {
@@ -65,22 +58,19 @@ router.get("/login", (req, res) => {
 router.get("/register", (req, res) => {
   res.render("registerUser");
 });
-router.get("/dashboard",checkAuth, async (req, res) => {
+router.get("/dashboard", checkAuth, async (req, res) => {
   try {
     const blogList = await postList.findAll({
       where: {
         user_id: req.session.userId,
       },
-      include: [{ all: true, nested: true }]
+      include: [{ all: true, nested: true }],
     });
     console.log(blogList[0].dataValues.comments);
     res.render("dashboard", { blogList });
   } catch (err) {
     res.render("dashboard");
-
-    // res.status(400).json({ err, message: "Not found" });
   }
-  
 });
 
 router.get("/allusers", checkAuth, async (req, res) => {
